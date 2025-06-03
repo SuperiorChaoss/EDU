@@ -369,6 +369,26 @@ img {
 
 /* Further mobile tweaks (under 480px) */
 @media (max-width: 480px) {
+  /* 1) Keep hero image focused on center area, not its top edge */
+  .hero {
+    background-position: center 35%;
+  }
+
+  /* 2) Prevent section titles from breaking mid-phrase, and shrink slightly */
+  #testimonials .section-title,
+  #cta .section-title,
+  #services .section-title {
+    white-space: nowrap;
+    font-size: 1.8rem;
+    line-height: 1.2;
+  }
+
+  /* 3) Further tweak “Our Signature Service” to look a bit more intentional */
+  #services .section-title {
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+  }
+
   /* Hero text scaling */
   .hero-content h1 {
     font-size: 2rem;
@@ -473,7 +493,7 @@ img {
 /* Call-To-Action Section */
 #cta {
   background-color: #222;
-    text-align: center;
+  text-align: center;
 }
 
 .cta-text {
@@ -485,7 +505,6 @@ img {
   margin-right: auto;
   text-align: center;
 }
-
 
 /* Footer */
 footer {
@@ -534,7 +553,11 @@ footer {
    LOADING CURTAIN STYLES (with text between lines, 3-second animation)
    ──────────────────────────────────────────────────────────────────────────── */
 
-/* 1) Full-screen overlay */
+/* ────────────────────────────────────────────────────────────────────────────
+   LOADING CURTAIN STYLES (two‐line text, centered, with extra spacing)
+   ──────────────────────────────────────────────────────────────────────────── */
+
+/* 1) Full‐screen overlay */
 #loading-overlay {
   position: fixed;
   top: 0;
@@ -549,27 +572,27 @@ footer {
 /* 2) The two horizontal lines */
 .loading-line {
   position: absolute;
-  height: 4px;               /* Adjust thickness if desired */
+  height: 4px;               /* Thickness of each line */
   background-color: #ffd700; /* Bright gold */
 }
 
-/* 2a) Top line: fade in from Left → Right over 3s */
+/* 2a) Top bar: now sits at 40% so there's room for two‐line text */
 .loading-line.top {
-  top: 45%;                  /* Slightly above center */
+  top: 40%;
   left: 0;
-  width: 0;                  /* Start “hidden” */
+  width: 0;                  /* Start hidden (0 width) */
   animation: slideInLTR 3s ease-out forwards;
 }
 
-/* 2b) Bottom line: fade in from Right → Left over 3s */
+/* 2b) Bottom bar: now sits at 60% */
 .loading-line.bottom {
-  top: 55%;                  /* Slightly below center */
+  top: 60%;
   right: 0;
-  width: 0;                  /* Start “hidden” */
+  width: 0;                  /* Start hidden */
   animation: slideInRTL 3s ease-out forwards;
 }
 
-/* 3) Keyframes */
+/* 3) Keyframes (no change) */
 @keyframes slideInLTR {
   to { width: 100%; }
 }
@@ -577,20 +600,27 @@ footer {
   to { width: 100%; }
 }
 
-/* 4) Centered text between the lines */
+/* 4) Centered, two‐line text between the bars */
 .loading-text {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-family: 'Playfair Display', serif;
-  font-size: 2rem;           /* Adjust size as needed */
+  font-size: 2rem;           /* Adjust as needed */
   font-weight: 700;
   color: #ffd700;            /* Gold text */
-  white-space: nowrap;
+  text-align: center;        /* Center both lines */
+  white-space: nowrap;       /* Prevent each line from breaking separately */
+
+  /* If you explicitly inserted a <br> in your HTML like:
+       <div class="loading-text">
+         Extravagant Unique<br>Designs
+       </div>
+     this text‐align/transform combo will center those two lines perfectly. */
 }
 
-/* 5) Fade-out animation for the overlay itself */
+/* 5) Fade‐out animation */
 #loading-overlay.fade-out {
   animation: fadeOutOverlay 0.5s ease-in forwards;
 }
