@@ -529,3 +529,74 @@ footer {
   font-size: 1rem;
   padding: 0.75rem 1.5rem;
 }
+
+/* ────────────────────────────────────────────────────────────────────────────
+   LOADING CURTAIN STYLES (with text between lines, 3-second animation)
+   ──────────────────────────────────────────────────────────────────────────── */
+
+/* 1) Full-screen overlay */
+#loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff8dc; /* Pale gold background */
+  z-index: 2000;             /* Sit above everything else */
+  overflow: hidden;
+}
+
+/* 2) The two horizontal lines */
+.loading-line {
+  position: absolute;
+  height: 4px;               /* Adjust thickness if desired */
+  background-color: #ffd700; /* Bright gold */
+}
+
+/* 2a) Top line: fade in from Left → Right over 3s */
+.loading-line.top {
+  top: 45%;                  /* Slightly above center */
+  left: 0;
+  width: 0;                  /* Start “hidden” */
+  animation: slideInLTR 3s ease-out forwards;
+}
+
+/* 2b) Bottom line: fade in from Right → Left over 3s */
+.loading-line.bottom {
+  top: 55%;                  /* Slightly below center */
+  right: 0;
+  width: 0;                  /* Start “hidden” */
+  animation: slideInRTL 3s ease-out forwards;
+}
+
+/* 3) Keyframes */
+@keyframes slideInLTR {
+  to { width: 100%; }
+}
+@keyframes slideInRTL {
+  to { width: 100%; }
+}
+
+/* 4) Centered text between the lines */
+.loading-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;           /* Adjust size as needed */
+  font-weight: 700;
+  color: #ffd700;            /* Gold text */
+  white-space: nowrap;
+}
+
+/* 5) Fade-out animation for the overlay itself */
+#loading-overlay.fade-out {
+  animation: fadeOutOverlay 0.5s ease-in forwards;
+}
+@keyframes fadeOutOverlay {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

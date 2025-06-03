@@ -8,6 +8,21 @@
   <link rel="stylesheet" href="extravagant-unique-designs.css" />
 </head>
 <body>
+  <!-- ────────────────────────────────────────────────────────────────────
+       Loading Overlay / Curtain (with text between lines)
+       ──────────────────────────────────────────────────────────────────── -->
+  <div id="loading-overlay">
+    <div class="loading-line top"></div>
+
+    <!-- CENTERED TEXT: “Extravagant Unique Designs” -->
+    <div class="loading-text">Extravagant Unique Designs</div>
+
+    <div class="loading-line bottom"></div>
+  </div>
+
+  <!-- ────────────────────────────────────────────────────────────────────
+       …the rest of your page content follows below…
+       ──────────────────────────────────────────────────────────────────── -->
   <!-- Translucent Gold Navbar -->
 <header class="navbar">
   <div class="container">
@@ -172,6 +187,19 @@
       link.addEventListener('click', () => {
         navLinks.classList.remove('active');
       });
+    });
+  </script>
+  <script>
+    window.addEventListener('load', () => {
+      const overlay = document.getElementById('loading-overlay');
+      if (!overlay) return;
+
+      // Wait for 3 seconds (animation duration) before starting the fade-out
+      setTimeout(() => {
+        overlay.classList.add('fade-out');
+        // After the 0.5s fade-out completes, remove the overlay element
+        setTimeout(() => overlay.remove(), 500);
+      }, 3000);
     });
   </script>
 </body>
